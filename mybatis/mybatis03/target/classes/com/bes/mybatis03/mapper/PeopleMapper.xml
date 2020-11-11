@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bes.mybatis03.mapper.PeopleMapper">
+    <resultMap id="PeopleMapper" type="People">
+        <result column="password" property="pwd"/>
+    </resultMap>
+
+    <select id="getAllPeople" resultMap="PeopleMapper">
+        select * from people;
+    </select>
+
+    <select id="getPeopleById" resultType="People" parameterType="int">
+        select * from people where id = #{id};
+    </select>
+
+    <insert id="insertPeople" parameterType="People">
+        insert into people (name, password, email) values (#{name}, #{password}, #{email});
+    </insert>
+
+    <update id="updatePeople" parameterType="People">
+        update people set name = #{name}, email = #{email}, password=#{password} where id = #{id};
+    </update>
+
+    <delete id="deletePeopleById" parameterType="int">
+        delete from people where id = #{id};
+    </delete>
+</mapper>
